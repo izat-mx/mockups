@@ -172,13 +172,13 @@
     const clientData = {
       'C0A': {
         sites: [
-          { id: 'site A', name: 'Site A' },
-          { id: 'Site B', name: 'Site B' }
+          { id: 'site A', name: 'Building A' },
+          { id: 'Site B', name: 'Open Site B' }
         ],
         projects: {
           'C0A-hq': [
-            { id: 'Site B', name: 'Site B' },
-            { id: 'Site D', name: 'Site D' }
+            { id: 'Site B', name: 'Open Site B' },
+            { id: 'Site D', name: 'Site Park D' }
           ],
           'C0A-branch1': [
             { id: 'Site C', name: 'Site C' }
@@ -192,11 +192,11 @@
         ],
         projects: {
           'C0B-main': [
-            { id: 'C0B-main-cloud', name: 'Cloud Migration' }
+            { id: 'C0B-main-cloud', name: 'Cloud Office Building' }
           ],
           'C0B-r&d': [
-            { id: 'C0B-rd-lab', name: 'Lab Equipment' },
-            { id: 'C0B-rd-ai', name: 'AI Research Platform' }
+            { id: 'C0B-rd-lab', name: 'Laboratory A' },
+            { id: 'C0B-rd-ai', name: 'AI Research Office' }
           ]
         }
       },
@@ -206,7 +206,7 @@
         ],
         projects: {
           'C0C-office': [
-            { id: 'C0C-tps', name: 'TPS Reports System' }
+            { id: 'C0C-tps', name: 'TPS Tower' }
           ]
         }
       },
@@ -236,7 +236,7 @@
             { id: 'C0E-tower-defense', name: 'Defense Office' }
           ],
           'C0E-facility': [
-            { id: 'C0E-facility-lab', name: 'Advanced Materials Lab' }
+            { id: 'C0E-facility-lab', name: 'Advanced Materials Lab'
           ]
         }
       }
