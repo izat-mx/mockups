@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add New BAU</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-50 text-gray-800 min-h-screen">
+  <div class="max-w-3xl mx-auto mt-12 p-8 bg-white rounded-xl shadow-md mb-12">
+    <h1 class="text-3xl font-bold mb-2">Add New BAU</h1>
+    <p class="text-sm text-gray-500 mb-8">Create a new Business As Usual Task</p>
+
+    <!-- Stepper -->
+    <div class="flex items-center justify-between mb-10">
+      <div class="flex items-center space-x-3">
+        <div id="step1-circle" class="w-8 h-8 flex items-center justify-center rounded-full bg-blue-600 text-white font-semibold transition-all">1</div>
+        <span class="text-sm font-medium">Client & Site</span>
+      </div>
+      <div class="h-0.5 bg-gray-300 flex-1 mx-4" id="step-connector"></div>
+      <div class="flex items-center space-x-3">
+        <div id="step2-circle" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-300 text-gray-600 font-semibold transition-all">2</div>
+        <span class="text-sm font-medium text-gray-500" id="step2-text">Details</span>
+      </div>
+    </div>
+
+    <!-- Step 1: Client & Site Form -->
+    <div id="step1-form" class="space-y-6">
+      <!-- Client Selection -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Client</label>
+        <select id="client-select" class="w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:ring focus:ring-blue-200 focus:outline-none">
+          <option value="">Select Existing client</option>
+          <option value="C0A">Client A</option>
+          <option value="C0B">Client B</option>
+          <option value="C0C">Client C</option>
+          <option value="C0D">Client D</option>
+          <option value="C0E">Client E</option>
+        </select>
+      </div>
+
+      <!-- Site Selection -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Site</label>
+        <select id="site-select" class="w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:ring focus:ring-blue-200 focus:outline-none">
+          <option value="">Select site</option>
+          <!-- Sites will be populated based on client selection -->
+        </select>
+      </div>
+
+      <!-- Project Selection -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Project</label>
+        <select id="project-select" class="w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:ring focus:ring-blue-200 focus:outline-none">
+          <option value="">Select project</option>
+          <!-- Projects will be populated based on site selection -->
+        </select>
+      </div>
+
+      <!-- Next Button -->
+      <div class="flex justify-end pt-4">
+        <button id="next-btn" type="button" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+          Next
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: Details Form -->
+    <div id="step2-form" class="space-y-6 hidden">
+      <!-- BAU Type -->
+      <div>
+        <label class="block text-sm font-medium mb-1">BAU Type</label>
+        <select id="bau-type" class="w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:ring focus:ring-blue-200 focus:outline-none">
+          <option value="">Select task type</option>
+          <option value="1st-level">1st Level Support</option>
+          <option value="2nd-level">2nd Level Support</option>
+          <option value="ad-hoc">Ad-Hoc</option>
+          <option value="quarterly">Quarterly Maintenance</option>
+          <option value="site-visit">Site Visit</option>
+          <option value="training">Training</option>
+          <option value="payment">Payment</option>
+          <option value="cloud-renewal">Cloud Subscription Renewal</option>
+          <option value="contract-renewal">EASI Contract Renewal</option>
+          <option value="maintenance-renewal">Maintenance Renewal</option>
+          <option value="upsell">Upsell</option>
+        </select>
+      </div>
+
+      <!-- Report Channel -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Report Channel</label>
+        <select id="report-channel" class="w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:ring focus:ring-blue-200 focus:outline-none">
+          <option value="">Select Channel</option>
+          <option value="chat">Chat Group</option>
+          <option value="email">Email</option>
+          <option value="call">Personal Call</option>
+          <option value="others">Others</option>
+        </select>
+      </div>
+
+      <!-- PIC Report -->
+      <div>
+        <label class="block text-sm font-medium mb-1">PIC Report</label>
+        <input type="text" id="pic-report" placeholder="Enter PIC Name" class="w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:ring focus:ring-blue-200 focus:outline-none" />
+      </div>
+
+      <!-- Date Report -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Date Report</label>
+        <input type="date" id="date-report" class="w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:ring focus:ring-blue-200 focus:outline-none" />
+      </div>
+
+      <!-- Case Severity -->
+      <div>
+        <label class="block text-sm font-medium mb-2">Case Severity</label>
+        <div class="flex flex-wrap gap-6">
+          <label class="inline-flex items-center">
+            <input type="radio" name="severity" value="1" class="text-blue-600 focus:ring-blue-500" />
+            <span class="ml-2 text-sm">1 (Low)</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="severity" value="2" class="text-yellow-500 focus:ring-yellow-400" />
+            <span class="ml-2 text-sm">2 (Intermediate)</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="severity" value="3" class="text-red-600 focus:ring-red-500" />
+            <span class="ml-2 text-sm">3 (High)</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" name="severity" value="4" class="text-purple-600 focus:ring-purple-500" />
+            <span class="ml-2 text-sm">4 (Critical)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Description</label>
+        <textarea id="description" rows="4" placeholder="Enter case description" class="w-full border border-gray-300 rounded-md px-3 py-2 shadow-sm focus:ring focus:ring-blue-200 focus:outline-none"></textarea>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex justify-between pt-4">
+        <button id="back-btn" type="button" class="px-6 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 transition-all">
+          Back
+        </button>
+        <button id="submit-btn" type="button" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+          Submit
+        </button>
+      </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="success-message" class="hidden">
+      <div class="text-center py-10">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">BAU Task Created</h2>
+        <p class="text-gray-600 mb-6">Your Business As Usual task has been successfully created.</p>
+        <button id="new-bau-btn" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all">
+          Create Another BAU
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Sample data
+    const clientData = {
+      'C0A': {
+        sites: [
+          { id: 'site A', name: 'Building A' },
+          { id: 'Site B', name: 'Open Site B' }
+        ],
+        projects: {
+          'C0A-hq': [
+            { id: 'Site B', name: 'Open Site B' },
+            { id: 'Site D', name: 'Site Park D' }
+          ],
+          'C0A-branch1': [
+            { id: 'Site C', name: 'Site C' }
+          ]
+        }
+      },
+      'C0B': {
+        sites: [
+          { id: 'C0B-main', name: 'C0B Main Campus' },
+          { id: 'C0B-r&d', name: 'C0B R&D Center' }
+        ],
+        projects: {
+          'C0B-main': [
+            { id: 'C0B-main-cloud', name: 'Cloud Office Building' }
+          ],
+          'C0B-r&d': [
+            { id: 'C0B-rd-lab', name: 'Laboratory A' },
+            { id: 'C0B-rd-ai', name: 'AI Research Office' }
+          ]
+        }
+      },
+      'C0C': {
+        sites: [
+          { id: 'C0C-office', name: 'C0C Office' }
+        ],
+        projects: {
+          'C0C-office': [
+            { id: 'C0C-tps', name: 'TPS Tower' }
+          ]
+        }
+      },
+      'C0D': {
+        sites: [
+          { id: 'C0D-lab', name: 'Laboratory' },
+          { id: 'C0D-hive', name: 'Hive Facility' }
+        ],
+        projects: {
+          'C0D-lab': [
+            { id: 'C0D-bio', name: 'Biotech Research' }
+          ],
+          'C0D-hive': [
+            { id: 'C0D-security', name: 'Security Systems' },
+            { id: 'C0D-ai', name: 'AI Control Building' }
+          ]
+        }
+      },
+      'C0E': {
+        sites: [
+          { id: 'C0E-tower', name: 'C0E Tower' },
+          { id: 'C0E-facility', name: 'C0E Research Facility' }
+        ],
+        projects: {
+          'C0E-tower': [
+            { id: 'C0E-tower-energy', name: 'Clean Energy Building' },
+            { id: 'C0E-tower-defense', name: 'Defense Office' }
+          ],
+          'C0E-facility': [
+            { id: 'C0E-facility-lab', name: 'Advanced Materials Lab' }
+          ]
+        }
+      }
+    };
+
+    // DOM Elements
+    const clientSelect = document.getElementById('client-select');
+    const siteSelect = document.getElementById('site-select');
+    const projectSelect = document.getElementById('project-select');
+    const nextBtn = document.getElementById('next-btn');
+    const backBtn = document.getElementById('back-btn');
+    const submitBtn = document.getElementById('submit-btn');
+    const step1Form = document.getElementById('step1-form');
+    const step2Form = document.getElementById('step2-form');
+    const step1Circle = document.getElementById('step1-circle');
+    const step2Circle = document.getElementById('step2-circle');
+    const step2Text = document.getElementById('step2-text');
+    const stepConnector = document.getElementById('step-connector');
+    const successMessage = document.getElementById('success-message');
+    const newBauBtn = document.getElementById('new-bau-btn');
+
+    // Required fields for step 2
+    const bauType = document.getElementById('bau-type');
+    const reportChannel = document.getElementById('report-channel');
+    const picReport = document.getElementById('pic-report');
+    const dateReport = document.getElementById('date-report');
+    const description = document.getElementById('description');
+    const severityRadios = document.querySelectorAll('input[name="severity"]');
+
+    // Event Listeners
+    clientSelect.addEventListener('change', updateSites);
+    siteSelect.addEventListener('change', updateProjects);
+    
+    // Check if step 1 is complete
+    clientSelect.addEventListener('change', checkStep1Complete);
+    siteSelect.addEventListener('change', checkStep1Complete);
+    projectSelect.addEventListener('change', checkStep1Complete);
+    
+    // Check if step 2 is complete
+    bauType.addEventListener('change', checkStep2Complete);
+    reportChannel.addEventListener('change', checkStep2Complete);
+    picReport.addEventListener('input', checkStep2Complete);
+    dateReport.addEventListener('change', checkStep2Complete);
+    description.addEventListener('input', checkStep2Complete);
+    severityRadios.forEach(radio => {
+      radio.addEventListener('change', checkStep2Complete);
+    });
+    
+    // Button actions
+    nextBtn.addEventListener('click', goToStep2);
+    backBtn.addEventListener('click', goToStep1);
+    submitBtn.addEventListener('click', submitForm);
+    newBauBtn.addEventListener('click', resetForm);
+
+    // Functions
+    function updateSites() {
+      const clientId = clientSelect.value;
+      siteSelect.innerHTML = '<option value="">Select site</option>';
+      projectSelect.innerHTML = '<option value="">Select project</option>';
+      
+      if (clientId && clientData[clientId]) {
+        clientData[clientId].sites.forEach(site => {
+          const option = document.createElement('option');
+          option.value = site.id;
+          option.textContent = site.name;
+          siteSelect.appendChild(option);
+        });
+      }
+      
+      checkStep1Complete();
+    }
+
+    function updateProjects() {
+      const clientId = clientSelect.value;
+      const siteId = siteSelect.value;
+      projectSelect.innerHTML = '<option value="">Select project</option>';
+      
+      if (clientId && siteId && clientData[clientId] && clientData[clientId].projects[siteId]) {
+        clientData[clientId].projects[siteId].forEach(project => {
+          const option = document.createElement('option');
+          option.value = project.id;
+          option.textContent = project.name;
+          projectSelect.appendChild(option);
+        });
+      }
+      
+      checkStep1Complete();
+    }
+
+    function checkStep1Complete() {
+      const isComplete = clientSelect.value && siteSelect.value && projectSelect.value;
+      nextBtn.disabled = !isComplete;
+    }
+
+    function checkStep2Complete() {
+      const isSeveritySelected = Array.from(severityRadios).some(radio => radio.checked);
+      const isComplete = bauType.value && reportChannel.value && picReport.value && 
+                        dateReport.value && description.value && isSeveritySelected;
+      submitBtn.disabled = !isComplete;
+    }
+
+    function goToStep2() {
+      step1Form.classList.add('hidden');
+      step2Form.classList.remove('hidden');
+      
+      // Update stepper UI
+      step1Circle.classList.remove('bg-blue-600', 'text-white');
+      step1Circle.classList.add('bg-green-600', 'text-white');
+      step1Circle.innerHTML = '✓';
+      
+      step2Circle.classList.remove('bg-gray-300', 'text-gray-600');
+      step2Circle.classList.add('bg-blue-600', 'text-white');
+      step2Text.classList.remove('text-gray-500');
+      
+      stepConnector.classList.remove('bg-gray-300');
+      stepConnector.classList.add('bg-green-500');
+    }
+
+    function goToStep1() {
+      step2Form.classList.add('hidden');
+      step1Form.classList.remove('hidden');
+      
+      // Update stepper UI
+      step1Circle.classList.remove('bg-green-600');
+      step1Circle.classList.add('bg-blue-600');
+      step1Circle.innerHTML = '1';
+      
+      step2Circle.classList.remove('bg-blue-600', 'text-white');
+      step2Circle.classList.add('bg-gray-300', 'text-gray-600');
+      step2Text.classList.add('text-gray-500');
+      
+      stepConnector.classList.remove('bg-green-500');
+      stepConnector.classList.add('bg-gray-300');
+    }
+
+    function submitForm() {
+      // Get selected severity
+      let selectedSeverity = '';
+      severityRadios.forEach(radio => {
+        if (radio.checked) {
+          selectedSeverity = radio.value;
+        }
+      });
+      
+      // Collect form data
+      const formData = {
+        client: clientSelect.options[clientSelect.selectedIndex].text,
+        site: siteSelect.options[siteSelect.selectedIndex].text,
+        project: projectSelect.options[projectSelect.selectedIndex].text,
+        bauType: bauType.options[bauType.selectedIndex].text,
+        reportChannel: reportChannel.options[reportChannel.selectedIndex].text,
+        picReport: picReport.value,
+        dateReport: dateReport.value,
+        severity: selectedSeverity,
+        description: description.value
+      };
+      
+      console.log('Form submitted:', formData);
+      
+      // Show success message
+      step2Form.classList.add('hidden');
+      successMessage.classList.remove('hidden');
+    }
+
+    function resetForm() {
+      // Reset all form fields
+      clientSelect.value = '';
+      siteSelect.innerHTML = '<option value="">Select site</option>';
+      projectSelect.innerHTML = '<option value="">Select project</option>';
+      bauType.value = '';
+      reportChannel.value = '';
+      picReport.value = '';
+      dateReport.value = '';
+      description.value = '';
+      severityRadios.forEach(radio => {
+        radio.checked = false;
+      });
+      
+      // Reset UI
+      successMessage.classList.add('hidden');
+      step1Form.classList.remove('hidden');
+      
+      // Reset stepper
+      step1Circle.classList.remove('bg-green-600');
+      step1Circle.classList.add('bg-blue-600');
+      step1Circle.innerHTML = '1';
+      
+      step2Circle.classList.remove('bg-blue-600', 'text-white');
+      step2Circle.classList.add('bg-gray-300', 'text-gray-600');
+      step2Text.classList.add('text-gray-500');
+      
+      stepConnector.classList.remove('bg-green-500');
+      stepConnector.classList.add('bg-gray-300');
+      
+      // Disable buttons
+      nextBtn.disabled = true;
+      submitBtn.disabled = true;
+    }
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9644e6f1f44de535',t:'MTc1MzM3NTY3NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
