@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Add New BAU</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  //<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-50 text-gray-800 min-h-screen">
   <div class="max-w-3xl mx-auto mt-12 p-8 bg-white rounded-xl shadow-md mb-12">
